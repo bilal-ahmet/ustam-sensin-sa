@@ -25,6 +25,13 @@ const server = http.createServer((req, res) => {
     filePath = './index.html';
   }
   
+  // Favicon için özel handling
+  if (filePath === './favicon.ico') {
+    res.writeHead(204); // No content
+    res.end();
+    return;
+  }
+  
   // Dosya uzantısını al
   const extname = path.extname(filePath);
   let contentType = mimeTypes[extname] || 'application/octet-stream';
@@ -36,7 +43,7 @@ const server = http.createServer((req, res) => {
         // Dosya bulunamadı, index.html'e yönlendir (SPA için)
         fs.readFile('./index.html', (err, content) => {
           if (err) {
-            res.writeHead(500);
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
             res.end('Sunucu hatası!');
           } else {
             res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -44,7 +51,7 @@ const server = http.createServer((req, res) => {
           }
         });
       } else {
-        res.writeHead(500);
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
         res.end('Sunucu hatası: ' + error.code);
       }
     } else {
@@ -52,6 +59,15 @@ const server = http.createServer((req, res) => {
       res.end(content, 'utf-8');
     }
   });
+});
+
+// Error handling
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.log(`Port ${PORT} kullanımda. Farklı bir port deneyin.`);
+  } else {
+    console.error('Sunucu hatası:', err);
+  }
 });
 
 server.listen(PORT, () => {
