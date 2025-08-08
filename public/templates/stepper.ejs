@@ -1,0 +1,10 @@
+<nav class="stepper mb-3" aria-label="İş emri adımları">
+  <% steps.forEach(function(s, i){ %>
+    <div class="step <%= i < currentIndex ? 'completed' : (i === currentIndex ? 'active' : '') %>" <%= i === currentIndex ? 'aria-current="step"' : '' %>>
+      <div class="dot" aria-hidden="true"><%= i + 1 %></div>
+      <div class="step-title"><%= translateStatus(s) %></div>
+    </div>
+  <% }) %>
+</nav>
+
+
