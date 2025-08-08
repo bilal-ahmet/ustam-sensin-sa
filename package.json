@@ -2,12 +2,11 @@
   "name": "ustam-sensin",
   "version": "1.0.0",
   "description": "Ustam Sensin (Demo)",
-  "main": "api/index.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js",
-    "start": "node server.js",
-    "vercel-build": "echo 'Build completed'"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
