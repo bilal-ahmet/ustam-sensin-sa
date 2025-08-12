@@ -7,8 +7,7 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Statik dosyalar için public klasörünü kullan
-app.use(express.static(path.join(__dirname, 'public')));
+// Statik dosya sunumunu Vercel'e devrediyoruz. Bu satır kaldırıldı.
 
 // Ana sayfa için route
 app.get('/', (req, res) => {
