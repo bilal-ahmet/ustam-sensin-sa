@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-const port = 3001;
 
 // EJS'yi view engine olarak ayarla
 app.set('view engine', 'ejs');
@@ -16,6 +15,5 @@ app.get('/', (req, res) => {
     res.render('index', { title: 'Ustam Sensin' });
 });
 
-app.listen(port, () => {
-    console.log(`Sunucu http://localhost:${port} adresinde çalışıyor`);
-});
+// Vercel'in uygulamayı kullanabilmesi için dışa aktar
+module.exports = app;
