@@ -1,41 +1,38 @@
-<div class="col-12 col-md-6 mb-3">
-  <div class="card mechanic-card shadow-sm h-100">
-    <div class="card-body d-flex flex-column justify-content-between">
-      <div>
-        <h6 class="mb-1"><%= mechanic.name %></h6>
-        <div class="rating-stars mb-1">
-          <% for (let i = 0; i < Math.round(mechanic.rating); i++) { %>★<% } %>
-          <% for (let i = Math.round(mechanic.rating); i < 5; i++) { %>☆<% } %>
-          <small>(<%= mechanic.reviewsCount %>)</small>
+<div class="col-12 col-md-6 mb-4">
+  <div class="card mechanic-card h-100">
+    <div class="card-body">
+      <button class="btn-fav <%= isFav ? 'active' : '' %>" data-fav-id="<%= mechanic.id %>" aria-label="Favoriye ekle/kaldır" aria-pressed="<%= isFav %>">
+        <i class="fas fa-heart"></i>
+      </button>
+      <div class="d-flex align-items-center mb-3">
+        <div class="mechanic-avatar">
+          <i class="fas fa-user"></i>
         </div>
-        <div class="mb-2">
-          <% mechanic.specialties.forEach(function(s){ %>
-            <span class="chip"><%= s %></span>
-          <% }) %>
-        </div>
-        <div class="mb-2">
-          <small class="text-muted">Usta marka uzmanlıkları:</small>
-          <div class="mt-1">
-            <% (mechanic.brandExpertise || []).forEach(function(b){ %>
-              <span class="badge bg-light text-dark border me-1"><%= b %></span>
-            <% }) %>
+        <div class="ms-3">
+          <h5 class="card-title mb-0"><%= mechanic.name %></h5>
+          <div class="rating">
+            <span class="rating-score"><%= mechanic.rating.toFixed(1) %></span>
+            <% for (let i = 0; i < 5; i++) { %>
+              <i class="fa-star <%= i < Math.round(mechanic.rating) ? 'fas' : 'far' %>"></i>
+            <% } %>
+            <span class="reviews-count">(<%= mechanic.reviewsCount %> yorum)</span>
           </div>
         </div>
-        <% if ((mechanic.interests || []).length) { %>
-        <div class="mb-2">
-          <small class="text-muted">İlgi alanları:</small>
-          <div class="mt-1">
-            <% (mechanic.interests || []).forEach(function(i){ %>
-              <span class="badge bg-secondary-subtle text-dark border me-1"><%= i %></span>
-            <% }) %>
-          </div>
-        </div>
-        <% } %>
-        <div class="eta">Tahmini başlangıç: <%= mechanic.etaMinutes %> dk</div>
       </div>
-      <div class="mt-3 d-flex justify-content-between align-items-center">
-        <a class="btn btn-outline-primary btn-sm" href="#/usta/<%= mechanic.id %>">Detay</a>
-        <button class="favorite-btn <%= isFav ? 'active' : '' %>" data-fav-id="<%= mechanic.id %>" aria-label="Favoriye ekle/kaldır" aria-pressed="<%= isFav %>"><%= isFav ? '♥' : '♡' %></button>
+      
+      <p class="card-text text-muted mb-3"><%= mechanic.bio %></p>
+
+      <div class="specialties mb-3">
+        <% mechanic.specialties.forEach(function(s){ %>
+          <span class="specialty-tag"><%= s %></span>
+        <% }) %>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="eta">
+          <i class="far fa-clock"></i> <%= mechanic.etaMinutes %> dk içinde
+        </div>
+        <a class="btn btn-primary btn-sm stretched-link" href="#/usta/<%= mechanic.id %>">Profiline Git</a>
       </div>
     </div>
   </div>
