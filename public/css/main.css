@@ -106,6 +106,18 @@ body {
   color: white;
 }
 
+footer {
+  background-color: transparent; /* Zaten body karanlık */
+  padding: 2rem 0;
+  margin-top: 3rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-muted);
+}
+
+footer strong {
+    color: var(--heading-color);
+}
+
 /* New Mechanic Card Styles */
 .mechanic-card {
   background: var(--card-bg);
