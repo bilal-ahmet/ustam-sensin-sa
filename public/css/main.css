@@ -107,10 +107,13 @@ body {
 }
 
 footer {
-  background-color: transparent; /* Zaten body karanlık */
+  background-color: transparent;
   padding: 2rem 0;
   margin-top: 3rem;
   border-top: 1px solid var(--border-color);
+}
+
+footer, footer .text-muted {
   color: var(--text-muted);
 }
 
